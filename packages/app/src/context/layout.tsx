@@ -478,7 +478,7 @@ export const { use: useLayout, provider: LayoutProvider } = createSimpleContext(
       })
     })
 
-    const enriched = createMemo(() => server.projects.list().map(enrich))
+    const enriched = createMemo(() => server.projects.list().filter((p) => !!p?.worktree).map(enrich))
     const list = createMemo(() => {
       const projects = enriched()
       return projects.map((project) => {

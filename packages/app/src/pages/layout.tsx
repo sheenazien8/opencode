@@ -598,7 +598,7 @@ export default function Layout(props: ParentProps) {
       if (!last) return
       await openProject(last, true)
     } else {
-      const next = list.find((project) => project.worktree === last) ?? list[0]
+      const next = list.find((project) => project?.worktree === last) ?? list[0]
       if (!next) return
       await openProject(next.worktree, true)
     }

@@ -60,7 +60,7 @@ function createGlobalSync() {
   const [globalStore, setGlobalStore] = createStore<GlobalStore>({
     ready: false,
     path: { state: "", config: "", worktree: "", directory: "", home: "" },
-    project: projectCache.value,
+    project: projectCache.value.filter((p) => !!p?.worktree),
     session_todo: {},
     provider: { all: [], connected: [], default: {} },
     provider_auth: {},
@@ -117,7 +117,7 @@ function createGlobalSync() {
       if (projectWritten) return
       const cached = projectCache.value
       if (cached.length === 0) return
-      setGlobalStore("project", cached)
+      setGlobalStore("project", cached.filter((p) => !!p?.worktree))
     })
   }
 
